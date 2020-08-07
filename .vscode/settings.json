@@ -1,0 +1,28 @@
+{
+    "sqltools.connections": [
+        {
+            "askForPassword": true,
+            "connectionTimeout": 30,
+            "database": "MySQL",
+            "dialect": "MySQL",
+            "port": 3306,
+            "server": "127.0.0.1",
+            "username": "root",
+            "password": "",
+            "driver": "MySQL"
+        },
+        {
+            "askForPassword": true,
+            "database": "db22z17",
+            "driver": "PostgreSQL",
+            "name": "less22",
+            "pgOptions": {
+                "ssl": {}
+            },
+            "port": 3306,
+            "previewLimit": 50,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}
