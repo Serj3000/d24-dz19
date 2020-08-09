@@ -57,6 +57,7 @@
                                 <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a>
                                 <a href="{{route('categories.index')}}"><i> Login (Cat) </i></a>
+                                <a href="{{route('tags.index')}}"><i> Login (Tag) </i></a>
                             </div>
                         </div>
                     </div>
