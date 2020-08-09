@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/json', function () {
+        // return response('Hello World', 200)
+        //           ->header('Location: http://odeku.edu.ua/');
+});
+
 Route::get('/admin', function(){
 
     // текущий каталог
@@ -338,19 +343,19 @@ Route::get('/form', function(){
 // Route::resources([
 //     '/admin/categories' => 'CategoryController'
 // ]);
-//Общий перечень объектов
+//Общий перечень объектов Index
 Route::get('/admin/categories', 'CategoryController@index')->name('categories.index');
-//Создание
+//Создание Create
 Route::get('/admin/categories/create', 'CategoryController@create')->name('categories.create');
-//Сохранение
+//Сохранение Store
 Route::post('/admin/categories', 'CategoryController@store')->name('categories.store');
-//Просмотр
+//Просмотр Show
 Route::get('/admin/categories/{category?}', 'CategoryController@show')->name('categories.show');
-//Редактирование
+//Редактирование Edit
 Route::get('/admin/categories/{category?}/edit', 'CategoryController@edit')->name('categories.edit');
-//Обновление
+//Обновление Update
 Route::put('/admin/categories/{category?}', 'CategoryController@update')->name('categories.update');
-//Уничтожение
+//Уничтожение Delete
 Route::delete('/admin/categories/{category?}', 'CategoryController@destroy')->name('categories.destroy');
 //|
 //|----Tags

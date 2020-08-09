@@ -17,4 +17,13 @@ class Category extends Model
         return $this->hasMany(\App\Post::class, 'category_id', 'id');
         // return $this->hasMany(\App\Post::class);
     }
+    /**
+     * Получить значение ключа роута модели.
+     *
+     * @return mixed
+     */
+    // public function getRouteKey()
+    // {
+    //     return $this->slug;
+    // }
 }
