@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryControllerAdmin extends Controller
 {
 //Index Общий
     public function index()
@@ -43,10 +43,11 @@ class CategoryController extends Controller
         $category=new \App\Category();
         $category->name=$validatedData['name'];
         $category->slug=$validatedData['slug'];
+        //$category->created_at=\Carbon\Carbon::now();
         $category->save();
 
         //return redirect()->action('CategoryController@index');
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with('success', "Category: $category->name was created.");
     }
 //Show Просмотр 
     public function show()
@@ -61,16 +62,23 @@ class CategoryController extends Controller
 //Update Обновление 
     public function update(\App\Category $category, Request $request)
     {
+        //dd($request->all());
         // //Валидация методом validate()
         $validatedData = $request->validate([
         'name' => 'required|min:2|max:25|unique:categories,name,'.$category->id,
         'slug' => 'required|min:2|max:25|unique:categories,slug,'.$category->id,
         ]);
 
+        // $validatedData=$request->validateWithBag('blog', [
+        //     'name' => ['required', 'min:2', 'max:25', 'unique:categories,name,'.$category->id],
+        //     'slug' => ['required', 'min:2', 'max:25', 'unique:categories,slug,'.$category->id],
+        // ]);
+
         // В отличае от метода store() экземпляр класса new \App\Category(); для метода update() создавать не нужно,
         // т.к. он приходит в аргаменте метода update(\App\Category $category, Request $request)
         $category->name=$validatedData['name'];
         $category->slug=$validatedData['slug'];
+        //$category->updated_at=\Carbon\Carbon::now();
         $category->save();
 
         // Редиректы с одноразовыми переменными сессии
@@ -81,6 +89,6 @@ class CategoryController extends Controller
     public function destroy(\App\Category $category)
     {
        $category->delete();
-       return redirect()->route('categories.index');
+       return redirect()->route('categories.index')->with('success', "Category: $category->name was deleted.");
     }
 }

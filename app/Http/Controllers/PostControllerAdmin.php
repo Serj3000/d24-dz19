@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Tag;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class PostControllerAdmin extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('admins.tags.list_tag', ['tags'=>\App\Tag::all()]);
+        //
     }
 
     /**
@@ -24,7 +23,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('admins/tags/create_tag');
+        //
     }
 
     /**
@@ -35,21 +34,16 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $tags=new \App\Tag();
-        $tags->name=$request->name;
-        $tags->slug=$request->slug;
-        $tags->save();
-
-        return redirect()->route('tags.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+    public function show($id)
     {
         //
     }
@@ -57,10 +51,10 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
+    public function edit($id)
     {
         //
     }
@@ -69,10 +63,10 @@ class TagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -80,12 +74,11 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy($id)
     {
-        $tag->delete();
-        return redirect()->route('tags.index');
+        //
     }
 }

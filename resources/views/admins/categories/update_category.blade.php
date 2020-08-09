@@ -3,7 +3,7 @@
 <nav>
 <a href="{{route('index.blog')}}"> hillel-24 </a> | 
 <a href="{{route('categories.index')}}"> Index (List) </a> | 
-<a href="{{route('categories.edit', ['category'=>\App\Category::all()->first()])}}"> Edit </a>
+<a href="{{route('categories.edit', ['category'=>\App\Category::all()->first()])}}"> Edit -> Update </a>
 </nav>
 <hr>
 <br>
@@ -34,7 +34,7 @@
                 @endforeach
             </div>
         @endif
-    <input type="text" name="name" value="{{@old('name', $category->name)}}" @if($errors->has("name")) style="border-color: red" @endif>
+    <input type="text" name="name" value="{{old('name', $category->name)}}" @if($errors->has("name")) style="border-color: red" @endif>
     {{-- <input type="text" name="name_update" value="Features" @if($errors->has("name")) style="border-color: red" @endif> --}}
     <br>
     <p>Category slug:</p>
@@ -45,7 +45,7 @@
                 @endforeach
             </div>
         @endif
-    <input type="text" name="slug" value="{{@old('slug', $category->slug)}}" @if($errors->has("slug")) style="border-color: red" @endif>
+    <input type="text" name="slug" value="{{old('slug', $category->slug)}}" @if($errors->has("slug")) style="border-color: red" @endif>
     {{-- <input type="text" name="slug_update" value="features" @if($errors->has("slug")) style="border-color: red" @endif> --}}
     <br><br>
     <input type="submit" name="update" value="Update">

@@ -3,7 +3,7 @@
 <nav>
 <a href="{{route('index.blog')}}"> hillel-24 </a> | 
 <a href="{{route('categories.create')}}"> Create </a> | 
-<a href="{{route('categories.edit', ['category'=>\App\Category::all()->first()])}}"> Edit </a>
+<a href="{{route('categories.edit', ['category'=>\App\Category::all()->first()])}}"> Edit -> Update </a>
 </nav>
 <hr>
 <br>
@@ -18,19 +18,21 @@
             <th>id</th>
             <th>Name</th>
             <th>Slug</th>
-            <th>Date</th>
-            <th>Update</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Edit</th>
             <th>Drop</th>
             <br>
         </tr>
     @foreach($categories as $category)
         <tr>
             <td width="5%">{{$category->id}}</td>
-            <td width="40%">{{$category->name}}</td>
+            <td width="30%">{{$category->name}}</td>
             <td width="25%">{{$category->slug}}</td>
-            <td width="15%">{{$category->created_at}}</td>
-            <td width="10%"><a href="{{route('categories.update', ['category'=>$category->id.'/edit'])}}"> Update </a></td>
-            <td width="5%">
+            <td width="12%">{{$category->created_at}}</td>
+            <td width="12%">{{$category->updated_at}}</td>
+            <td width="8%"><a href="{{route('categories.update', ['category'=>$category->id.'/edit'])}}"> Update </a></td>
+            <td width="8%">
                 <form method="POST" action="{{route('categories.destroy', ['category'=>$category->id])}}">
                     @method('delete')
                     @csrf
