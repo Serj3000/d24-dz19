@@ -8,11 +8,25 @@
 <hr>
 <br>
 <form method="POST" action="{{route('tags.store')}}">
-    <p>Categoy name</p>
-    <input type="text" name="name">
+    <p>Tag name</p>
+        @if($errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->get("name") as $error)
+                    {{$error}}
+                @endforeach
+            </div>
+        @endif
+        <input type="text" name="name" value="{{old('name')}}" @if($errors->has("name")) style="border-color: red" @endif>
     <br>
-    <p>Category slug</p>
-    <input type="text" name="slug">
+    <p>Tag slug</p>
+            @if($errors->has("slug"))
+            <div class="alert alert-danger">
+                @foreach ($errors->get("slug") as $error)
+                    {{$error}}
+                @endforeach
+            </div>
+        @endif
+    <input type="text" name="slug" value="{{old('slug')}}" @if($errors->has("slug")) style="border-color: red" @endif>
     <br><br>
     <input type="submit" name="create" value="Create">
     <br>

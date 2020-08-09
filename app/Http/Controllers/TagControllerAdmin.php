@@ -35,10 +35,15 @@ class TagControllerAdmin extends Controller
      */
     public function store(Request $request)
     {
-        $tags=new \App\Tag();
-        $tags->name=$request->name;
-        $tags->slug=$request->slug;
-        $tags->save();
+        $validatedData=$request->validate([
+            'name' => 'required|min:2|max:25|unique:tags',
+            'slug' => 'required|min:2|max:25|unique:tags',
+        ]);
+        
+        $tag=new \App\Tag();
+        $tag->name=$validatedData['name'];
+        $tag->slug=$validatedData['slug'];
+        $tag->save();
 
         return redirect()->route('tags.index');
     }
