@@ -335,7 +335,6 @@ Route::get('/session', function(){
 Route::get('/form', function(){
     return view('trash.form');
 });
-
 // //|------------------------------------------Admin---------------------------------------------------------
 // //|
 // //|----Categories
