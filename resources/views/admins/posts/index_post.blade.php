@@ -2,8 +2,8 @@
 <h3>location: "~views/admins/posts/index_post.blade.php (list_post.blade.php)"</h3>
 <nav>
 <a href="{{route('index.blog')}}"> hillel-24 </a> | 
-<a href="{{route('post.create')}}"> Create </a> | 
-<a href="{{route('post.edit', ['post'=>\App\Post::all()->first()])}}"> Edit -> Update </a>
+<a href="{{route('posts.create')}}"> Create </a> | 
+<a href="{{route('posts.edit', ['post'=>\App\Post::all()->first()])}}"> Edit -> Update </a>
 </nav>
 <hr>
 <br>
@@ -35,9 +35,10 @@
             <td width="12%">{{$post->updated_at}}</td>
             <td width="3%">Edit</td>
             <td width="3%">
-                <form method="POST">
+                <form method="POST" action="{{route('posts.destroy', ['post'=>$post->id])}}">
                 @method('DELETE')
-                    <p><a href="{{route('post.destroy', ['post'=>$post->id])}}">Drop</p>
+                    <input type="submit" name="postdrop" value="Drop">
+                    {{-- <p><a href="{{route('post.destroy', ['id'=>$post->id])}}">Drop</p> --}}
                 @csrf
                 </form>
             </td>

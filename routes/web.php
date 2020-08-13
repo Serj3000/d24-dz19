@@ -386,16 +386,16 @@ Route::delete('/admin/tags/{tag?}', 'TagControllerAdmin@destroy')->name('tags.de
 // ]);
 //
 //Index Общий перечень объектов
-Route::get('/admin/posts', 'PostControllerAdmin@index')->name('post.index');
+Route::get('/admin/posts', 'PostControllerAdmin@index')->name('posts.index');
 //Create Создание
-Route::get('/admin/posts/create', 'PostControllerAdmin@create')->name('post.create');
+Route::get('/admin/posts/create', 'PostControllerAdmin@create')->name('posts.create');
 //Store Сохранение
-Route::post('/admin/posts', 'PostControllerAdmin@store')->name('post.store');
+Route::post('/admin/posts', 'PostControllerAdmin@store')->name('posts.store');
 //Show Просмотр
-Route::get('/admin/posts/{post?}', 'PostControllerAdmin@show')->name('post.show');
+Route::get('/admin/posts/{post?}', 'PostControllerAdmin@show')->name('posts.show');
 //Edit Редактирование
-Route::get('/admin/posts/{post?}/edit', 'PostControllerAdmin@edit')->name('post.edit');
+Route::get('/admin/posts/{post?}/edit', 'PostControllerAdmin@edit')->name('posts.edit');
 //Update Обновление
-Route::put('/admin/posts/{post?}', 'PostControllerAdmin@update')->name('post.update');
+Route::put('/admin/posts/{post?}', 'PostControllerAdmin@update')->name('posts.update');
 //Delete Уничтожение
-Route::delete('/admin/posts/{post?}', 'PostControllerAdmin@destroy')->name('post.destroy');
+Route::delete('/admin/posts/{post?}', 'PostControllerAdmin@destroy')->name('posts.destroy');
