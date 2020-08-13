@@ -343,19 +343,19 @@ Route::get('/form', function(){
 //     '/admin/categories' => 'CategoryControllerAdmin'
 // ]);
 //
-//Общий перечень объектов Index
+//Index Общий перечень объектов 
 Route::get('/admin/categories', 'CategoryControllerAdmin@index')->name('categories.index');
-//Создание Create
+//Create Создание 
 Route::get('/admin/categories/create', 'CategoryControllerAdmin@create')->name('categories.create');
-//Сохранение Store
+//Store Сохранение 
 Route::post('/admin/categories', 'CategoryControllerAdmin@store')->name('categories.store');
-//Просмотр Show
+//Show Просмотр 
 Route::get('/admin/categories/{category?}', 'CategoryControllerAdmin@show')->name('categories.show');
-//Редактирование Edit
+//Edit Редактирование 
 Route::get('/admin/categories/{category?}/edit', 'CategoryControllerAdmin@edit')->name('categories.edit');
-//Обновление Update
+//Update Обновление 
 Route::put('/admin/categories/{category?}', 'CategoryControllerAdmin@update')->name('categories.update');
-//Уничтожение Delete
+//Delete Уничтожение 
 Route::delete('/admin/categories/{category?}', 'CategoryControllerAdmin@destroy')->name('categories.destroy');
 // //|
 // //|----Tags
@@ -378,3 +378,24 @@ Route::get('/admin/tags/{tag?}/edit', 'TagControllerAdmin@edit')->name('tags.edi
 Route::put('/admin/tags/{tag?}', 'TagControllerAdmin@update')->name('tags.update');
 //Delete Уничтожение
 Route::delete('/admin/tags/{tag?}', 'TagControllerAdmin@destroy')->name('tags.destroy');
+// //|
+// //|----Posts
+// //|
+// Route::resources([
+//     '/admin/posts' => 'PostControllerAdmin'
+// ]);
+//
+//Index Общий перечень объектов
+Route::get('/admin/posts', 'PostControllerAdmin@index')->name('post.index');
+//Create Создание
+Route::get('/admin/posts/create', 'PostControllerAdmin@create')->name('post.create');
+//Store Сохранение
+Route::post('/admin/posts', 'PostControllerAdmin@store')->name('post.store');
+//Show Просмотр
+Route::get('/admin/posts/{post?}', 'PostControllerAdmin@show')->name('post.show');
+//Edit Редактирование
+Route::get('/admin/posts/{post?}/edit', 'PostControllerAdmin@edit')->name('post.edit');
+//Update Обновление
+Route::put('/admin/posts/{post?}', 'PostControllerAdmin@update')->name('post.update');
+//Delete Уничтожение
+Route::delete('/admin/posts/{post?}', 'PostControllerAdmin@destroy')->name('post.destroy');

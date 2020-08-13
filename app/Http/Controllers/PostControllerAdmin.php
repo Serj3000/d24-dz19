@@ -13,7 +13,8 @@ class PostControllerAdmin extends Controller
      */
     public function index()
     {
-        //
+        $posts=\App\Post::all();
+        return view('admins.posts.index_post', ['posts'=>$posts]);
     }
 
     /**
