@@ -36,7 +36,7 @@
     <p>Category name:</p>
         <select name="category_id" form="posts_form">
         @foreach(\App\Category::all() as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option>
+            <option value="{{$category->id}}" @if($category->id==old('$category->id')) selected @endif>{{$category->name}}</option>
         @endforeach
         </select>
 
@@ -44,12 +44,12 @@
         <p><textarea rows="1" cols="60" name="post_title" wrap="soft" autofocus>Title lorem text</textarea></p>
     
     <p>Preview text:</p>
-        <p><textarea rows="5" cols="60" name="post_preview_text" wrap="soft" autofocus>Lorem preview text</textarea></p>
+        <p><textarea rows="3" cols="60" name="post_preview_text" wrap="soft" autofocus>Lorem preview text</textarea></p>
     <br>
     {{-- <input type="text" name="post_image" value=1> --}}
     
     <p>Post body:</p>
-        <p><textarea rows="15" cols="60" name="post_body" wrap="soft" autofocus>
+        <p><textarea rows="10" cols="60" name="post_body" wrap="soft" autofocus>
         Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem
         Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
         В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов,
@@ -59,6 +59,20 @@
         Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки
         типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.
         </textarea></p>
+    <p>Теги:</p>
+        @if($errors->has("tag.*"))
+            <div class="alert alert-danger">
+                @foreach ($errors->get("tag.*") as $error)
+                    @foreach($error as $err)
+                    {{$err}}
+                    @endforeach
+                @endforeach
+            </div>
+        @endif
+        <br>
+        @foreach(\App\Tag::all() as $tag)
+            <input type="checkbox" name="post_tag[]" value="{{$tag->id}}">{{$tag->name}}
+        @endforeach
     <br>
     <br>
 

@@ -56,13 +56,16 @@ class PostControllerAdmin extends Controller
         
         // $post->save();
 // //--------------------------------------------------------------------
+        // // Метод pluck() извлекает все значения по заданному ключу
+        //dd(\App\Tag::all()->pluck('id')->toArray());
 
         $validatedData = $request->validate([
-        'autor_id'=>'required|numeric',
-        'category_id'=>'required|numeric',
+        'autor_id'=>'required|numeric|exists:App\User,id',
+        'category_id'=>'required|numeric|exists:App\Category,id',
         'post_title' => 'required|min:2|max:255',
         'post_preview_text'=>'max:255',
         'post_body' => 'max:100000',
+        'post_tag.*'=>'in:implode(",", \App\Tag::all()->pluck("id")->toArray())',
         ]);
 
         $post = new \App\Post();
