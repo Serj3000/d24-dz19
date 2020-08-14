@@ -58,23 +58,31 @@ class PostControllerAdmin extends Controller
 // //--------------------------------------------------------------------
         // // Метод pluck() извлекает все значения по заданному ключу
         //dd(\App\Tag::all()->pluck('id')->toArray());
+        //dd(implode(",", \App\Tag::all()->pluck('id')->toArray()), $request->input("post-tag"));
+        // return response()->view('admins.posts.create_post');
+
+        //$data=$request->input();
+        //dd($data);
+
+        //$data=$request->input("post-tag");
+        //dd($data);
 
         $validatedData = $request->validate([
-        'autor_id'=>'required|numeric|exists:App\User,id',
-        'category_id'=>'required|numeric|exists:App\Category,id',
-        'post_title' => 'required|min:2|max:255',
-        'post_preview_text'=>'max:255',
-        'post_body' => 'max:100000',
-        'post_tag.*'=>'in:implode(",", \App\Tag::all()->pluck("id")->toArray())',
+        'autor-id'=>'required|numeric|exists:App\User,id',
+        'category-id'=>'required|numeric|exists:App\Category,id',
+        'post-title' => 'required|min:2|max:255',
+        'post-preview_text'=>'max:255',
+        'post-body' => 'max:100000',
+        // 'post-tag.*'=>'in:implode(",", \App\Tag::all()->pluck("id")->toArray())',
         ]);
 
         $post = new \App\Post();
-        $post->user_id = $validatedData['autor_id'];
-        $post->category_id = $validatedData['category_id'];
-        $post->title = $validatedData['post_title'];
-        $post->preview_text = $validatedData['post_title'];
+        $post->user_id = $validatedData['autor-id'];
+        $post->category_id = $validatedData['category-id'];
+        $post->title = $validatedData['post-title'];
+        $post->preview_text = $validatedData['post-title'];
         $post->image = 1;
-        $post->body = $validatedData['post_body'];
+        $post->body = $validatedData['post-body'];
         $post->saw = 0;
         
         $post->save();
