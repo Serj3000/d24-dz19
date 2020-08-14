@@ -45,3 +45,10 @@
         </tr>
     @endforeach
 </table>
+<br>
+<hr>
+<nav>
+<a href="{{route('index.blog')}}"> hillel-24 </a> | 
+<a href="{{route('posts.create')}}"> Create </a> | 
+<a href="{{route('posts.edit', ['post'=>\App\Post::all()->first()])}}"> Edit -> Update </a>
+</nav>

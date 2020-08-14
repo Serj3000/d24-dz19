@@ -8,7 +8,7 @@
 <hr>
 <br>
 
-{{-- {{dd($errors)}} --}}
+{{$errors}}
 
 {{-- {{($errors->has("name"))}} --}}
 
@@ -71,11 +71,19 @@
         @endif
         <br>
         @foreach(\App\Tag::all() as $tag)
-            <input type="checkbox" name="post_tag[]" value="{{$tag->id}}">{{$tag->name}}
+            <input type="checkbox" name="tag[]" value="{{$tag->id}}">{{$tag->name}}
         @endforeach
     <br>
     <br>
 
     <input type="submit" name="post_create" value="Create">
+
 @csrf
 </form>
+<br>
+<hr>
+<nav>
+<a href="{{route('index.blog')}}"> hillel-24 </a> | 
+<a href="{{route('posts.index')}}"> Index (List) </a> | 
+<a href="{{route('posts.edit', ['post'=>\App\Post::all()->first()])}}"> Edit -> Update </a>
+</nav>
