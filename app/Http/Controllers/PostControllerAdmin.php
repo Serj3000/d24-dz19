@@ -13,6 +13,8 @@ class PostControllerAdmin extends Controller
      */
     public function index()
     {
+        // echo '<br>'.\Request::ip().'<br>';
+        // echo '<br>'.var_dump(\Request::capture()).'<br>';
         return view('admins.posts.index_post', [
             'posts'=>\App\Post::all()
             ]);
@@ -56,13 +58,18 @@ class PostControllerAdmin extends Controller
         
         // $post->save();
 // //--------------------------------------------------------------------
+
+        //dd($request->all(), $request->input(), $request->method(),$request->ip(),$request->segments(), $request->capture());
+        
+        // $request->flash('requ');
+
         // // Метод pluck() извлекает все значения по заданному ключу
         //dd(\App\Tag::all()->pluck('id')->toArray());
         //dd(implode(",", \App\Tag::all()->pluck('id')->toArray()), $request->input("post-tag"));
         // return response()->view('admins.posts.create_post');
 
-        //$data=$request->input();
-        //dd($data);
+        // $data=$request->input();
+        // dd($data);
 
         //$data=$request->input("post-tag");
         //dd($data);
@@ -76,6 +83,9 @@ class PostControllerAdmin extends Controller
         // 'post-tag.*'=>'in:implode(",", \App\Tag::all()->pluck("id")->toArray())',
         ]);
 
+        //$request->flash();
+        //Request::flashOnly('autor-id', 'category-id');
+
         $post = new \App\Post();
         $post->user_id = $validatedData['autor-id'];
         $post->category_id = $validatedData['category-id'];
@@ -85,7 +95,8 @@ class PostControllerAdmin extends Controller
         $post->body = $validatedData['post-body'];
         $post->saw = 0;
         
-        $post->save();
+        // $post->save();
+        $post->push();
 
         return redirect()->route('posts.index');
     }
@@ -107,9 +118,9 @@ class PostControllerAdmin extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(\App\Post $post)
     {
-        //
+        return view('admins.posts.update_post', ['post'=>$post]);
     }
 
     /**
@@ -119,9 +130,9 @@ class PostControllerAdmin extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        
     }
 
     /**

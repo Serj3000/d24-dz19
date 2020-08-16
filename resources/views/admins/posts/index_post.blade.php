@@ -6,6 +6,10 @@
 <a href="{{route('posts.edit', ['post'=>\App\Post::all()->first()])}}"> Edit -> Update </a>
 </nav>
 <hr>
+{{-- {{dd(\Session::all())}} --}}
+    {{-- @if(\Session::has('requ')) --}}
+        {{-- <span style="color: green">{{\Session::get('requ')}}</span> --}}
+    {{-- @endif --}}
 <br>
 <div>
 
@@ -33,7 +37,7 @@
             <td width="3%">{{$post->saw}}</td>
             <td width="12%">{{$post->created_at}}</td>
             <td width="12%">{{$post->updated_at}}</td>
-            <td width="3%">Edit</td>
+            <td width="3%"><a href="{{route('posts.edit', ['post'=>$post->id])}}">Edit</a></td>
             <td width="3%">
                 <form method="POST" action="{{route('posts.destroy', ['post'=>$post->id])}}">
                 @method('DELETE')

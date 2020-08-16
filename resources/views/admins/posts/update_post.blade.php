@@ -1,19 +1,12 @@
-<?php
-    //$reque=session();
-?>
-<h2>Post Create</h2>
-<h3>location: "~views/admins/posts/create_post.blade.php"</h3>
+<h2>Post Update</h2>
+<h3>location: "~views/admins/posts/update_post.blade.php"</h3>
 <nav>
 <a href="{{route('index.blog')}}"> hillel-24 </a> | 
 <a href="{{route('posts.index')}}"> Index (List) </a> | 
-<a href="{{route('posts.edit', ['post'=>\App\Post::all()->first()])}}"> Edit -> Update </a>
+<a href="{{route('posts.create')}}"> Create </a>
 </nav>
 <hr>
 <br>
-
-{{-- {{$errors}} --}}
-
-{{-- {{($errors->has("name"))}} --}}
 
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -25,8 +18,6 @@
         </ul>
     </div>
 @endif
-
-
 
 <form method="POST" action="{{route('posts.store')}}" id="posts-form">
     <p>Autor:</p>
