@@ -38,7 +38,7 @@ class PostControllerAdmin extends Controller
      */
     public function store(Request $request)
     {
-// //--------------------------------------------------------------------
+    // //------------------------------------------------------------------
         // $validatedData = $request->validate([
         // 'user_id'=>'required|numeric',
         // 'category_id'=>'required|numeric',
@@ -57,10 +57,7 @@ class PostControllerAdmin extends Controller
         // $post->saw = 0;
         
         // $post->save();
-// //--------------------------------------------------------------------
-
-        //dd($request->all(), $request->input(), $request->method(),$request->ip(),$request->segments(), $request->capture());
-        
+    // //------------------------------------------------------------------
         // $request->flash('requ');
 
         // // Метод pluck() извлекает все значения по заданному ключу
@@ -74,6 +71,9 @@ class PostControllerAdmin extends Controller
         //$data=$request->input("post-tag");
         //dd($data);
 
+    //dd(\App\Post::max('id'), $request->all(), $request->input(), $request->method(),$request->ip(),$request->segments(), $request->capture());
+    
+    // //----------$request->validate()-----------------------------------
         $validatedData = $request->validate([
         'autor-id'=>'required|numeric|exists:App\User,id',
         'category-id'=>'required|numeric|exists:App\Category,id',
@@ -83,8 +83,8 @@ class PostControllerAdmin extends Controller
         // 'post-tag.*'=>'in:implode(",", \App\Tag::all()->pluck("id")->toArray())',
         ]);
 
-        //$request->flash();
-        //Request::flashOnly('autor-id', 'category-id');
+            //$request->flash();
+            //Request::flashOnly('autor-id', 'category-id');
 
         $post = new \App\Post();
         $post->user_id = $validatedData['autor-id'];
@@ -94,9 +94,28 @@ class PostControllerAdmin extends Controller
         $post->image = 1;
         $post->body = $validatedData['post-body'];
         $post->saw = 0;
-        
-        // $post->save();
+
+        //$post->save();
         $post->push();
+        
+    // //-------------Add Tag----------------------------------------------
+        // //---------attach()------------
+        $numIdPost=\App\Post::max('id');
+        $tagpost=\App\Post::find($numIdPost);
+        $tagpost->tag()->attach($request->input('post-tag'));
+
+        // //---------detach()-----------
+
+        // //---------sync()------------
+        //Используйте метод sync(), чтобы создать ассоциации многие-ко-многим.
+        //Метод sync() принимает массив ID, чтобы поместить его в промежуточную таблицу.
+        //Все ID, которые не находятся в данном массиве, будут удалены из промежуточной таблицы.
+        //После того как эта работа завершена, только ID из данного массива будут существовать в
+        //промежуточной таблице
+        // $numIdPost=\App\Post::max('id');
+        // $tagpost=\App\Post::find($numIdPost);
+        // $tagpost->tag()->sync($request->input('post-tag'));
+    // //-----------------------------------------------------------------
 
         return redirect()->route('posts.index');
     }
@@ -133,6 +152,7 @@ class PostControllerAdmin extends Controller
      */
     public function update(\App\Post $post, Request $request)
     {
+        //dd(\App\Post::find($post->id));
         $request->validate([
             'post-body'=>'max:10000',
         ]);
