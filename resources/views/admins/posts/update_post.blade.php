@@ -7,7 +7,7 @@
 </nav>
 <hr>
 <br>
-
+{{-- {{dd($post)}} --}}
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -19,39 +19,35 @@
     </div>
 @endif
 
-<form method="POST" action="{{route('posts.store')}}" id="posts-form">
+<form method="POST" action="{{route('posts.update', ['post'=>$post->id])}}" id="update-posts-form">
+@method('PUT')
     <p>Autor:</p>
-        <select name="autor-id" form="posts-form">
+        {{-- <select name="autor-id" form="posts-form">
             @foreach(\App\User::all() as $autor)
                 <option value="{{$autor->id}}">{{$autor->name}}</option>
             @endforeach
-        </select>
+        </select> --}}
+        <input type="text" name="update-post-autor" value="{{$post->user->name}}">
 
     <p>Category name:</p>
-        <select name="category-id" form="posts-form">
+        {{-- <select name="category-id" form="update-posts-form">
         @foreach(\App\Category::all() as $category)
             <option value="{{$category->id}}" @if($category->id==old('$category->id')) selected @endif>{{$category->name}}</option>
         @endforeach
-        </select>
+        </select> --}}
+        <input type="text" name="update-post-category" value="{{$post->category->name}}">
 
     <p>Post title:</p>
-        <p><textarea rows="1" cols="60" name="post-title" wrap="soft" autofocus>Title lorem text</textarea></p>
+        <p><textarea rows="1" cols="60" name="post-title" wrap="soft" autofocus>{{$post->title}}</textarea></p>
     
     <p>Preview text:</p>
-        <p><textarea rows="3" cols="60" name="post-preview-text" wrap="soft" autofocus>Lorem preview text</textarea></p>
+        <p><textarea rows="3" cols="60" name="post-preview-text" wrap="soft" autofocus>{{$post->preview_text}}</textarea></p>
     <br>
     {{-- <input type="text" name="post_image" value=1> --}}
     
     <p>Post body:</p>
         <p><textarea rows="10" cols="60" name="post-body" wrap="soft" autofocus>
-        Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem
-        Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
-        В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов,
-        используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил
-        без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его
-        популяризации в новое время послужили публикация листов Letraset с образцами
-        Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки
-        типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.
+            {{$post->body}}
         </textarea></p>
     <p>Теги:</p>
         @if($errors->has("post-tag.*"))
@@ -70,7 +66,7 @@
     <br>
     <br>
 
-    <input type="submit" name="post-create" value="Create">
+    <input type="submit" name="post-update" value="Update">
 
 @csrf
 </form>

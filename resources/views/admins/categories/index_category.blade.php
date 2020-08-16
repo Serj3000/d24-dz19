@@ -31,7 +31,8 @@
             <td width="25%">{{$category->slug}}</td>
             <td width="12%">{{$category->created_at}}</td>
             <td width="12%">{{$category->updated_at}}</td>
-            <td width="8%"><a href="{{route('categories.update', ['category'=>$category->id.'/edit'])}}"> Update </a></td>
+            {{-- <td width="8%"><a href="{{route('categories.update', ['category'=>$category->id.'/edit'])}}"> Update </a></td> --}}
+            <td width="8%"><a href="{{route('categories.edit', ['category'=>$category->id])}}"> Edit </a></td>
             <td width="8%">
                 <form method="POST" action="{{route('categories.destroy', ['category'=>$category->id])}}">
                     @method('delete')

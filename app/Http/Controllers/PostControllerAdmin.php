@@ -120,6 +120,7 @@ class PostControllerAdmin extends Controller
      */
     public function edit(\App\Post $post)
     {
+        //dd($post);
         return view('admins.posts.update_post', ['post'=>$post]);
     }
 
@@ -130,9 +131,11 @@ class PostControllerAdmin extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(\App\Post $post, Request $request)
     {
-        
+        $request->validate([
+            'post-body'=>'max:10000',
+        ]);
     }
 
     /**
