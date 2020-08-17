@@ -19,40 +19,40 @@
     </div>
 @endif
 
-<form method="POST" action="{{route('posts.update', ['post'=>$post->id])}}" id="update-posts-form">
+<form method="POST" action="{{route('posts.update', ['post'=>$post->id])}}" id="update_posts_form">
 @method('PUT')
     <p>Autor:</p>
-        {{-- <select name="autor-id" form="posts-form">
+        {{-- <select name="autor_id" form="update_post_autor">
             @foreach(\App\User::all() as $autor)
                 <option value="{{$autor->id}}">{{$autor->name}}</option>
             @endforeach
         </select> --}}
-        <input type="text" name="update-post-autor" value="{{$post->user->name}}">
+        <input type="text" name="update_post_autor" value="{{$post->user->name}}">
 
     <p>Category name:</p>
-        {{-- <select name="category-id" form="update-posts-form">
+        {{-- <select name="category_id" form="update-posts-form">
         @foreach(\App\Category::all() as $category)
             <option value="{{$category->id}}" @if($category->id==old('$category->id')) selected @endif>{{$category->name}}</option>
         @endforeach
         </select> --}}
-        <input type="text" name="update-post-category" value="{{$post->category->name}}">
+        <input type="text" name="update_post_category" value="{{$post->category->name}}">
 
     <p>Post title:</p>
-        <p><textarea rows="1" cols="60" name="post-title" wrap="soft" autofocus>{{$post->title}}</textarea></p>
+        <p><textarea rows="1" cols="60" name="post_title" wrap="soft" autofocus>{{$post->title}}</textarea></p>
     
     <p>Preview text:</p>
-        <p><textarea rows="3" cols="60" name="post-preview-text" wrap="soft" autofocus>{{$post->preview_text}}</textarea></p>
+        <p><textarea rows="3" cols="60" name="post_preview_text" wrap="soft" autofocus>{{$post->preview_text}}</textarea></p>
     <br>
     {{-- <input type="text" name="post_image" value=1> --}}
     
     <p>Post body:</p>
-        <p><textarea rows="10" cols="60" name="post-body" wrap="soft" autofocus>
+        <p><textarea rows="10" cols="60" name="post_body" wrap="soft" autofocus>
             {{$post->body}}
         </textarea></p>
     <p>Теги:</p>
-        @if($errors->has("post-tag.*"))
+        @if($errors->has("post_tag.*"))
             <div class="alert alert-danger">
-                @foreach ($errors->get("post-tag.*") as $error)
+                @foreach ($errors->get("post_tag.*") as $error)
                     @foreach($error as $err)
                         {{$err}}
                     @endforeach
@@ -61,12 +61,12 @@
         @endif
         <br>
         @foreach(\App\Tag::all() as $tag)
-            <input type="checkbox" name="post-tag[]" value="{{$tag->id}}">{{$tag->name}}
+            <input type="checkbox" name="post_tag[]" value="{{$tag->id}}">{{$tag->name}}
         @endforeach
     <br>
     <br>
 
-    <input type="submit" name="post-update" value="Update">
+    <input type="submit" name="post_update" value="Update">
 
 @csrf
 </form>

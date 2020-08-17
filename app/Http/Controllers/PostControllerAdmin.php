@@ -90,13 +90,13 @@ class PostControllerAdmin extends Controller
         $post->user_id = $validatedData['autor-id'];
         $post->category_id = $validatedData['category-id'];
         $post->title = $validatedData['post-title'];
-        $post->preview_text = $validatedData['post-title'];
+        $post->preview_text = $validatedData['post-preview-text'];
         $post->image = 1;
         $post->body = $validatedData['post-body'];
         $post->saw = 0;
 
-        //$post->save();
-        $post->push();
+        $post->save();
+        //$post->push();
         
     // //-------------Add Tag----------------------------------------------
         // //---------attach()------------
@@ -152,10 +152,21 @@ class PostControllerAdmin extends Controller
      */
     public function update(\App\Post $post, Request $request)
     {
-        //dd(\App\Post::find($post->id));
-        $request->validate([
-            'post-body'=>'max:10000',
+        $validatedData=$request->validate([
+            'post_body'=>'max:10000',
         ]);
+
+        //dd($request->all(), $post->user_id, $request->category_id, $request->post_title);
+        //dd($request);
+        // $post->user_id = $post->id;
+        // $post->category_id = $post->category->id;
+        $post->title = $request->post_title;
+        $post->preview_text = $request->post_preview_text;
+        $post->image = 1;
+        $post->body = $validatedData['post_body'];
+        $post->saw = 0;
+
+        $post->save();
     }
 
     /**
