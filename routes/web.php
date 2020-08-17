@@ -116,8 +116,12 @@ Route::get('/category-{slug?}', function($slug=null){
 
 
 Route::get('/tag-{id?}', function(\App\Tag $id){
-
+    
     $posts_po_tag=$id->post->toArray();
+
+    foreach($posts_po_tag as $key=>$value){
+        $tag_values[]=$value['id'];
+    }
 
     // // Вариант не работает. Разница формата дат по сравнению с вариантом использования моделью. Или что-то еще мешает.
     // $tag = DB::table('posts')
@@ -126,13 +130,13 @@ Route::get('/tag-{id?}', function(\App\Tag $id){
     // ->paginate(5);
 
     // // Вариант работает отлично. Позволяет в полной мере реализовывать связи таблиц БД по внешним ключам.
-    $tag = \App\Post::whereIn('id', $posts_po_tag)
-            ->latest('created_at')
-            ->paginate(5);
-
     // $tag = \App\Post::whereIn('id', $posts_po_tag)
     //         ->latest('created_at')
-    //         ->get();
+    //         ->paginate(5);
+
+    $tag = \App\Post::whereIn('id', $tag_values)
+            ->latest('created_at')
+            ->paginate(5);
 
     return view('index', ['params'=>$tag]);
 })->name('tag.blog');

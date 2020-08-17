@@ -28,7 +28,11 @@
 
 
 <form method="POST" action="{{route('posts.store')}}" id="posts-form">
+
     <p>Autor:</p>
+        @error('autor-id')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <select name="autor-id" form="posts-form">
             @foreach(\App\User::all() as $autor)
                 <option value="{{$autor->id}}">{{$autor->name}}</option>
@@ -36,6 +40,9 @@
         </select>
 
     <p>Category name:</p>
+        @error('category-id')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <select name="category-id" form="posts-form">
         @foreach(\App\Category::all() as $category)
             <option value="{{$category->id}}" @if($category->id==old('$category->id')) selected @endif>{{$category->name}}</option>
@@ -43,14 +50,23 @@
         </select>
 
     <p>Post title:</p>
+        @error('post-title')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <p><textarea rows="1" cols="60" name="post-title" wrap="soft" autofocus>Title lorem text</textarea></p>
     
     <p>Preview text:</p>
+        @error('post-preview-text')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <p><textarea rows="3" cols="60" name="post-preview-text" wrap="soft" autofocus>Lorem preview text</textarea></p>
     <br>
     {{-- <input type="text" name="post_image" value=1> --}}
     
     <p>Post body:</p>
+        @error('post-body')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <p><textarea rows="10" cols="60" name="post-body" wrap="soft" autofocus>
         Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem
         Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.

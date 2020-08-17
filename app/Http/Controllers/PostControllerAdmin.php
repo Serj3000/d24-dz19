@@ -156,13 +156,15 @@ class PostControllerAdmin extends Controller
     public function update(\App\Post $post, Request $request)
     {
         $validatedData=$request->validate([
+            'update_post_autor'=>'required|numeric|exists:App\User,id',
+            'update_post_category'=>'required|numeric|exists:App\Category,id',
             'post_body'=>'max:10000',
         ]);
-
+        //dd($validatedData);
         //dd($request->all(), $post->user_id, $request->category_id, $request->post_title);
         //dd($request);
-        // $post->user_id = $post->id;
-        // $post->category_id = $post->category->id;
+        $post->user_id = $validatedData['update_post_autor'];
+        $post->category_id =$validatedData['update_post_category'];
         $post->title = $request->post_title;
         $post->preview_text = $request->post_preview_text;
         $post->image = 1;

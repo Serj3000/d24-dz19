@@ -22,4 +22,3 @@
                             <!-- Post Curve Line -->
                             <img class="post-curve-line" src="img/core-img/post-curve-line.png" alt="">
                         </div>
-                        
