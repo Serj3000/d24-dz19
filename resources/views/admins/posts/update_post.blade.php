@@ -21,6 +21,8 @@
 
 <form method="POST" action="{{route('posts.update', ['post'=>$post->id])}}" id="update_posts_form">
 @method('PUT')
+    <p>Post id:</p>
+    <p>{{$post->id}}</p>
     <p>Autor:</p>
         {{-- <select name="autor_id" form="update_post_autor">
             @foreach(\App\User::all() as $autor)
@@ -62,6 +64,16 @@
         <br>
         @foreach(\App\Tag::all() as $tag)
             <input type="checkbox" name="post_tag[]" value="{{$tag->id}}">{{$tag->name}}
+        @endforeach
+        <br>
+
+
+        <?php $keyTa=DB::table('post_tag')->where('post_id', $post->id)->value('tag_id') ?>
+        <?php $keyTags=DB::table('post_tag')->where('post_id', $post->id)->get() ?>
+
+        {{-- @foreach(DB::select('select * from "post_tag" where post_id = :post_id', ['post_id' => $post->id])) --}}
+        @foreach(DB::table('post_tag')->where('post_id', $post->id)->get() as $keyTag)
+            {{$keyTag->tag_id}}
         @endforeach
     <br>
     <br>

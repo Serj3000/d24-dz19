@@ -105,6 +105,9 @@ class PostControllerAdmin extends Controller
         $tagpost->tag()->attach($request->input('post-tag'));
 
         // //---------detach()-----------
+        // $numIdPost=\App\Post::max('id');
+        // $tagpost=\App\Post::find($numIdPost);
+        // $tagpost->tag()->detach($request->input('post-tag'));
 
         // //---------sync()------------
         //Используйте метод sync(), чтобы создать ассоциации многие-ко-многим.
@@ -167,6 +170,14 @@ class PostControllerAdmin extends Controller
         $post->saw = 0;
 
         $post->save();
+
+    // //-------------Add Tag Update---------------------------------------
+        // //---------sync()-----------
+        $tagpost=\App\Post::find($post->id);
+        $tagpost->tag()->sync($request->input('post_tag'));
+    // //------------------------------------------------------------------
+
+        return redirect()->route('posts.index');
     }
 
     /**

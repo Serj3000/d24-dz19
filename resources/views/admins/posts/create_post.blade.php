@@ -27,7 +27,6 @@
 @endif
 
 
-
 <form method="POST" action="{{route('posts.store')}}" id="posts-form">
     <p>Autor:</p>
         <select name="autor-id" form="posts-form">
@@ -76,6 +75,7 @@
         @foreach(\App\Tag::all() as $tag)
             <input type="checkbox" name="post-tag[]" value="{{$tag->id}}">{{$tag->name}}
         @endforeach
+
     <br>
     <br>
 
