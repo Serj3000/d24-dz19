@@ -112,16 +112,19 @@ Route::get('/category-{slug?}', function($slug=null){
 
 
 
-
-
-
 Route::get('/tag-{id?}', function(\App\Tag $id){
-    
-    $posts_po_tag=$id->post->toArray();
 
-    foreach($posts_po_tag as $key=>$value){
-        $tag_values[]=$value['id'];
-    }
+    // // Вариант №1
+    // $posts_po_tag=$id->post->toArray();
+    // foreach($posts_po_tag as $value){
+    //     $tag_values[]=$value['id'];
+    // }
+    // // Вариант №2
+    $posts_po_tag=$id->post->pluck('id');
+        foreach($posts_po_tag as $value){
+            $tag_values[]=$value;
+        }
+
 
     // // Вариант не работает. Разница формата дат по сравнению с вариантом использования моделью. Или что-то еще мешает.
     // $tag = DB::table('posts')
@@ -133,6 +136,14 @@ Route::get('/tag-{id?}', function(\App\Tag $id){
     // $tag = \App\Post::whereIn('id', $posts_po_tag)
     //         ->latest('created_at')
     //         ->paginate(5);
+
+    // $pos=\App\Post::with('tag')->get();
+    // foreach ($pos as $po) {
+    //     echo '<pre>';
+    //     var_dump($po->tag);//->pivot
+    //     echo '</pre>';
+    // }
+    // exit;
 
     $tag = \App\Post::whereIn('id', $tag_values)
             ->latest('created_at')
